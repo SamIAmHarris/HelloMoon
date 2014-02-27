@@ -22,6 +22,12 @@ public class VideoFragment extends Fragment {
 
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_video, container, false);
@@ -30,6 +36,9 @@ public class VideoFragment extends Fragment {
         surfaceHolder = surfaceView.getHolder();
 
         videoPlayButton = (Button) v.findViewById(R.id.hellomoon_videoPlayButton);
+        if(mPlayer.getPlayer() != null && mPlayer.getPlayer().isPlaying()) {
+            videoPlayButton.setText(R.string.hellomoon_pause);
+        }
         videoPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
